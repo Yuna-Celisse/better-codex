@@ -1,0 +1,17 @@
+# Assembled upstream checkout and build outputs (regenerate with scripts/build.ps1)
+work/
+dist/
+
+# Local noise
+*.log
+*.snap.new
+*.pending-snap
+
+# Local tooling and archived prototypes (kept on disk, never committed)
+.claude/
+.legacy/
+
+# Personal files
+personal/
+.DS_Store
+Thumbs.db

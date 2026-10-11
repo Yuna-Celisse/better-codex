@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/openai/codex.git",
+  "tag": "rust-v0.162.0",
+  "commit": "c1382380de69521303b416720a52f42d51af6248",
+  "license": "Apache-2.0",
+  "overlay": "tui/ mirrors codex-rs/tui/ paths; scripts/assemble.ps1 replaces these files in the pinned checkout before building",
+  "legacyImplementation": ".legacy/ink-tui-2026-10-11"
+}

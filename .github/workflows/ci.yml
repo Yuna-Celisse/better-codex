@@ -1,0 +1,44 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: windows-latest
+    env:
+      RUST_MIN_STACK: "33554432"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.95.0
+
+      - name: Assemble pinned upstream + overlay
+        shell: pwsh
+        run: ./scripts/assemble.ps1
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: work/codex
+          key: ${{ hashFiles('upstream.json', 'tui/**') }}
+
+      - name: Curated overlay tests
+        shell: pwsh
+        run: ./scripts/test.ps1 -SkipAssemble
+
+      - name: Build
+        shell: pwsh
+        run: ./scripts/build.ps1 -SkipAssemble
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: better-codex-windows-debug
+          path: dist/codex.exe
+          if-no-files-found: error
