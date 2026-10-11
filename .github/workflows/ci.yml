@@ -26,7 +26,7 @@ jobs:
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: work/codex
+          workspaces: work/codex/codex-rs
           key: ${{ hashFiles('upstream.json', 'tui/**') }}
 
       - name: Curated overlay tests

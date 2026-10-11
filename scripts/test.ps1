@@ -18,7 +18,7 @@ if (-not $SkipAssemble) {
 # debug builds (upstream CI runs release tests).
 $env:RUST_MIN_STACK = '33554432'
 
-Push-Location (Join-Path $root 'work/codex')
+Push-Location (Join-Path $root 'work/codex/codex-rs')
 try {
     cargo test -p codex-tui --lib -- context_sidebar sidebar empty_state daemon_startup owned_transcript plan_mode
     if ($LASTEXITCODE) { throw 'curated tests failed.' }

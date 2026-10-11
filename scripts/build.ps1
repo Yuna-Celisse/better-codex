@@ -12,7 +12,7 @@ if (-not $SkipAssemble) {
     & (Join-Path $PSScriptRoot 'assemble.ps1')
 }
 
-Push-Location (Join-Path $root 'work/codex')
+Push-Location (Join-Path $root 'work/codex/codex-rs')
 try {
     if ($Release) {
         cargo build -p codex-cli --release
@@ -26,5 +26,5 @@ try {
 
 $configuration = if ($Release) { 'release' } else { 'debug' }
 New-Item -ItemType Directory -Force -Path (Join-Path $root 'dist') | Out-Null
-Copy-Item (Join-Path $root "work/codex/target/$configuration/codex.exe") (Join-Path $root 'dist/codex.exe') -Force
+Copy-Item (Join-Path $root "work/codex/codex-rs/target/$configuration/codex.exe") (Join-Path $root 'dist/codex.exe') -Force
 Write-Host "dist/codex.exe updated ($configuration build)." -ForegroundColor DarkCyan
